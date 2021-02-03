@@ -1,0 +1,19 @@
+
+.welcome-main{
+    height: 100vh;
+    text-align: center;
+}
+
+.welcomeScreen{
+    text-align: center;
+}
+
+.left, .right{
+    background-color: black;
+}
+
+.welcomePosts{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
