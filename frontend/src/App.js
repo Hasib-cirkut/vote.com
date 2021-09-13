@@ -1,6 +1,6 @@
 import 'antd/dist/antd.css';
 
-import Main from './Pages/Main';
+import Main from './Pages/Main/Main';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
