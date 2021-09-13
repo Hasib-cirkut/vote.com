@@ -1,12 +1,16 @@
 import 'antd/dist/antd.css';
 
-import Welcome from './Components/Welcome';
+import Main from './Pages/Main';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
 	return (
-		<div className="App">
-			<Welcome />
-		</div>
+		<BrowserRouter>
+			<Switch>
+				<Route path="/" exact component={Main} />
+			</Switch>
+		</BrowserRouter>
 	);
 }
 
