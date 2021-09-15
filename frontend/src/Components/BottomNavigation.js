@@ -1,70 +1,167 @@
 import React from 'react';
+import { useState } from 'react';
+
+import { Link } from 'react-router-dom';
 
 const BottomNavigation = () => {
+	const [ selected, setSelected ] = useState('home');
+
 	return (
 		<React.Fragment>
-			<section className="block fixed inset-x-0 bottom-0 z-10 bg-yellow-300 shadow">
-				<div id="tabs" className="flex justify-around">
-					<a className="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
-						<svg width="25" height="25" viewBox="0 0 42 42" className="inline-block mb-1">
-							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-								<path
-									d="M21.0847458,3.38674884 C17.8305085,7.08474576 17.8305085,10.7827427 21.0847458,14.4807396 C24.3389831,18.1787365 24.3389831,22.5701079 21.0847458,27.6548536 L21.0847458,42 L8.06779661,41.3066256 L6,38.5331279 L6,26.2681048 L6,17.2542373 L8.88135593,12.4006163 L21.0847458,2 L21.0847458,3.38674884 Z"
-									fill="currentColor"
-									fill-opacity="0.1"
-								/>
-								<path
-									d="M11,8 L33,8 L11,8 Z M39,17 L39,36 C39,39.3137085 36.3137085,42 33,42 L11,42 C7.6862915,42 5,39.3137085 5,36 L5,17 L7,17 L7,36 C7,38.209139 8.790861,40 11,40 L33,40 C35.209139,40 37,38.209139 37,36 L37,17 L39,17 Z"
-									fill="currentColor"
-								/>
-								<path
-									d="M22,27 C25.3137085,27 28,29.6862915 28,33 L28,41 L16,41 L16,33 C16,29.6862915 18.6862915,27 22,27 Z"
+			<section className="block fixed inset-x-0 bottom-0 z-10 bg-white shadow h-auto transition delay-150 duration-300 ease-in-out">
+				<div id="tabs" className="flex flex-row justify-around items-center h-full py-4">
+					<Link to="/">
+						<div
+							onClick={() => setSelected('home')}
+							id="home"
+							className={`flex flex-row justify-center items-center 
+						${selected === 'home' ? 'py-1 px-4 bg-blue-200 rounded-full' : ''}`}
+						>
+							<div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
 									stroke="currentColor"
-									stroke-width="2"
-									fill="currentColor"
-									fill-opacity="0.1"
-								/>
-								<rect
-									fill="currentColor"
-									transform="translate(32.000000, 11.313708) scale(-1, 1) rotate(-45.000000) translate(-32.000000, -11.313708) "
-									x="17"
-									y="10.3137085"
-									width="30"
-									height="2"
-									rx="1"
-								/>
-								<rect
-									fill="currentColor"
-									transform="translate(12.000000, 11.313708) rotate(-45.000000) translate(-12.000000, -11.313708) "
-									x="-3"
-									y="10.3137085"
-									width="30"
-									height="2"
-									rx="1"
-								/>
-							</g>
-						</svg>
-						<span className="tab tab-home block text-xs">Home</span>
-					</a>
+									stroke-width="2.5"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="feather feather-home"
+								>
+									<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+									<polyline points="9 22 9 12 15 12 15 22" />
+								</svg>
+							</div>
 
-					<a class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
-						<svg width="25" height="25" viewBox="0 0 42 42" class="inline-block mb-1">
-							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-								<path
-									d="M20.5890101,0.254646884 C12.8696785,5.50211755 8.0025785,14.258415 14.1941217,18.8708225 C23.16683,25.5550669 13.3362326,40.2698884 33.1021758,38.4149164 C29.6814884,40.8311956 25.5065164,42.2507054 21,42.2507054 C9.40202025,42.2507054 0,32.8486852 0,21.2507054 C0,9.79003409 9.18071714,0.473634138 20.5890101,0.254646884 Z"
-									fill="currentColor"
-									opacity="0.1"
-								/>
-								<path
-									d="M25.9500282,20.3643496 L22.4308312,38.2677802 C22.3775703,38.5387376 22.1147395,38.7152155 21.8437821,38.6619546 C21.6570955,38.6252584 21.507413,38.4857901 21.4576354,38.3021581 L16.5951895,20.3643496 L20.099732,4.44663907 C20.1385204,4.27046145 20.2692032,4.12883813 20.4417012,4.07604096 C20.7057521,3.99522179 20.9853245,4.14376046 21.0661436,4.40781135 L25.9500282,20.3643496 Z M21.3022963,22.2852638 C22.4068658,22.2852638 23.3022963,21.3898333 23.3022963,20.2852638 C23.3022963,19.1806943 22.4068658,18.2852638 21.3022963,18.2852638 C20.1977268,18.2852638 19.3022963,19.1806943 19.3022963,20.2852638 C19.3022963,21.3898333 20.1977268,22.2852638 21.3022963,22.2852638 Z"
-									fill="currentColor"
-									transform="translate(21.272609, 20.629524) rotate(-315.000000) translate(-21.272609, -20.629524) "
-								/>
-								<circle stroke="currentColor" stroke-width="2" cx="21" cy="21" r="20" />
-							</g>
-						</svg>
-						<span class="tab tab-explore block text-xs">Explore</span>
-					</a>
+							<span className={`${selected === 'home' ? 'ml-2 font-medium' : 'hidden'}`}>Home</span>
+						</div>
+					</Link>
+
+					<Link to="/search">
+						<div
+							onClick={() => setSelected('search')}
+							id="search"
+							className={`flex flex-row justify-center items-center ${selected === 'search'
+								? 'py-1 px-4 bg-yellow-200 rounded-full'
+								: ''}`}
+						>
+							<div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2.5"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="feather feather-search"
+								>
+									<circle cx="11" cy="11" r="8" />
+									<line x1="21" y1="21" x2="16.65" y2="16.65" />
+								</svg>
+							</div>
+
+							<span className={`${selected === 'search' ? 'ml-2 font-medium' : 'hidden'}`}>Search</span>
+						</div>
+					</Link>
+
+					<div
+						onClick={() => setSelected('request')}
+						id="request"
+						className={`flex flex-row justify-center items-center ${selected === 'request'
+							? 'py-1 px-4 bg-red-200 rounded-full'
+							: ''}`}
+					>
+						<div>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="feather feather-plus-circle"
+							>
+								<circle cx="12" cy="12" r="10" />
+								<line x1="12" y1="8" x2="12" y2="16" />
+								<line x1="8" y1="12" x2="16" y2="12" />
+							</svg>
+						</div>
+
+						<span className={`${selected === 'request' ? 'ml-2 font-medium' : 'hidden'}`}>Request</span>
+					</div>
+
+					<div
+						onClick={() => setSelected('notification')}
+						id="notification"
+						className={`flex flex-row justify-center items-center ${selected === 'notification'
+							? 'py-1 px-4 bg-green-200 rounded-full'
+							: ''}`}
+					>
+						<div>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="feather feather-bell"
+							>
+								<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+								<path d="M13.73 21a2 2 0 0 1-3.46 0" />
+							</svg>
+						</div>
+
+						<span className={`${selected === 'notification' ? 'ml-2 font-medium' : 'hidden'}`}>
+							Notification
+						</span>
+					</div>
+
+					<div
+						onClick={() => setSelected('settings')}
+						id="settings"
+						className={`flex flex-row justify-center items-center ${selected === 'settings'
+							? 'py-1 px-4 bg-pink-200 rounded-full'
+							: ''}`}
+					>
+						<div>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="feather feather-sliders"
+							>
+								<line x1="4" y1="21" x2="4" y2="14" />
+								<line x1="4" y1="10" x2="4" y2="3" />
+								<line x1="12" y1="21" x2="12" y2="12" />
+								<line x1="12" y1="8" x2="12" y2="3" />
+								<line x1="20" y1="21" x2="20" y2="16" />
+								<line x1="20" y1="12" x2="20" y2="3" />
+								<line x1="1" y1="14" x2="7" y2="14" />
+								<line x1="9" y1="8" x2="15" y2="8" />
+								<line x1="17" y1="16" x2="23" y2="16" />
+							</svg>
+						</div>
+
+						<span className={`${selected === 'settings' ? 'ml-2 font-medium' : 'hidden'}`}>Settings</span>
+					</div>
 				</div>
 			</section>
 		</React.Fragment>

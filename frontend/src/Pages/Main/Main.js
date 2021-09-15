@@ -10,12 +10,6 @@ const Main = () => {
 				<div id="body" className="flex-1 overflow-y-auto">
 					<ThreadCard />
 					<ThreadCard />
-					<ThreadCard />
-					<ThreadCard />
-					<ThreadCard />
-					<ThreadCard />
-
-					<BottomNavigation />
 				</div>
 			</div>
 		</React.Fragment>
