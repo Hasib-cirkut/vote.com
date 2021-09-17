@@ -8,7 +8,7 @@ const BottomNavigation = () => {
 
 	return (
 		<React.Fragment>
-			<section className="block fixed inset-x-0 bottom-0 z-10 bg-white shadow h-auto transition delay-150 duration-300 ease-in-out">
+			<section className="block fixed inset-x-0 bottom-0 z-10 bg-white shadow h-auto">
 				<div id="tabs" className="flex flex-row justify-around items-center h-full py-4">
 					<Link to="/">
 						<div
@@ -69,64 +69,68 @@ const BottomNavigation = () => {
 						</div>
 					</Link>
 
-					<div
-						onClick={() => setSelected('request')}
-						id="request"
-						className={`flex flex-row justify-center items-center ${selected === 'request'
-							? 'py-1 px-4 bg-red-200 rounded-full'
-							: ''}`}
-					>
-						<div>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								class="feather feather-plus-circle"
-							>
-								<circle cx="12" cy="12" r="10" />
-								<line x1="12" y1="8" x2="12" y2="16" />
-								<line x1="8" y1="12" x2="16" y2="12" />
-							</svg>
+					<Link to="/request">
+						<div
+							onClick={() => setSelected('request')}
+							id="request"
+							className={`flex flex-row justify-center items-center ${selected === 'request'
+								? 'py-1 px-4 bg-red-200 rounded-full'
+								: ''}`}
+						>
+							<div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="feather feather-plus-circle"
+								>
+									<circle cx="12" cy="12" r="10" />
+									<line x1="12" y1="8" x2="12" y2="16" />
+									<line x1="8" y1="12" x2="16" y2="12" />
+								</svg>
+							</div>
+
+							<span className={`${selected === 'request' ? 'ml-2 font-medium' : 'hidden'}`}>Request</span>
 						</div>
+					</Link>
 
-						<span className={`${selected === 'request' ? 'ml-2 font-medium' : 'hidden'}`}>Request</span>
-					</div>
+					<Link to="/notification">
+						<div
+							onClick={() => setSelected('notification')}
+							id="notification"
+							className={`flex flex-row justify-center items-center ${selected === 'notification'
+								? 'py-1 px-4 bg-green-200 rounded-full'
+								: ''}`}
+						>
+							<div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="feather feather-bell"
+								>
+									<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+									<path d="M13.73 21a2 2 0 0 1-3.46 0" />
+								</svg>
+							</div>
 
-					<div
-						onClick={() => setSelected('notification')}
-						id="notification"
-						className={`flex flex-row justify-center items-center ${selected === 'notification'
-							? 'py-1 px-4 bg-green-200 rounded-full'
-							: ''}`}
-					>
-						<div>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								class="feather feather-bell"
-							>
-								<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-								<path d="M13.73 21a2 2 0 0 1-3.46 0" />
-							</svg>
+							<span className={`${selected === 'notification' ? 'ml-2 font-medium' : 'hidden'}`}>
+								Notification
+							</span>
 						</div>
-
-						<span className={`${selected === 'notification' ? 'ml-2 font-medium' : 'hidden'}`}>
-							Notification
-						</span>
-					</div>
+					</Link>
 
 					<div
 						onClick={() => setSelected('settings')}
