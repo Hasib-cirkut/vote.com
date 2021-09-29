@@ -2,7 +2,7 @@ import React from 'react';
 
 const InputBox = () => {
 	return (
-		<div id="body" className="w-3/4">
+		<div id="body">
 			<div id="form">
 				<div id="title" className="flex flex-col my-2 py-2 text-center w-full">
 					<label for="title">Title</label>

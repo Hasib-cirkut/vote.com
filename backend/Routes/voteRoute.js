@@ -4,6 +4,14 @@ const router = express.Router();
 const VoteThreadModel = require('../Models/VoteThread');
 const VotePostModel = require('../Models/VotePost');
 
+const auth = require('../middleware/auth.js');
+
+router.get('/', auth, (req, res) => {
+	res.status(200).send({
+		message: 'Welcome to vote.com!!'
+	});
+});
+
 router.post('/addThread', async (req, res) => {
 	try {
 		const { username, title, genre, desc } = req.body;

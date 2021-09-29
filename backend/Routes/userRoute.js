@@ -4,6 +4,37 @@ const router = express.Router();
 const UserModel = require('../Models/User');
 const RequestModel = require('../Models/Request');
 
+const jwt = require('jsonwebtoken');
+
+router.post('/login', async (req, res) => {
+	try {
+		const { username, password } = req.body;
+
+		let oldUser = await UserModel.findOne({ username });
+
+		console.log(oldUser);
+
+		if (oldUser && oldUser.password === password) {
+			//user found
+
+			//create a jwt token for this user
+
+			const token = jwt.sign({ user_id: oldUser._id }, process.env.JWT_TOKEN, {
+				expiresIn: '2h'
+			});
+
+			return res.status(200).send({
+				user: oldUser,
+				token
+			});
+		}
+	} catch (err) {
+		res.status(403).send({
+			message: 'User not found.'
+		});
+	}
+});
+
 router.post('/register', async (req, res) => {
 	try {
 		const { username, email, password, displayName, type } = req.body;

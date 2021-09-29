@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 	res.send('Hello world');
 });
 
-let uri = `mongodb://localhost:27017/voteDB`;
+let uri = process.env.MONGO_URI;
 
 try {
 	mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });

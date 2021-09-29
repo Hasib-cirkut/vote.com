@@ -1,4 +1,5 @@
 import Main from './Pages/Main/Main';
+import Login from './Pages/Login/Login';
 import Post from './Pages/Post/Post';
 import Search from './Pages/Search/Search';
 import Request from './Pages/Request/Request';
@@ -12,12 +13,13 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Switch>
+				<Route path="/login" exact component={Login} />
 				<Layout>
 					<Route path="/" exact component={Main} />
-					<Route path="/post" component={Post} />
-					<Route path="/search" component={Search} />
-					<Route path="/request" component={Request} />
-					<Route path="/notification" component={Notification} />
+					<Route path="/post" exact component={Post} />
+					<Route path="/search" exact component={Search} />
+					<Route path="/request" exact component={Request} />
+					<Route path="/notification" exact component={Notification} />
 				</Layout>
 			</Switch>
 		</BrowserRouter>
