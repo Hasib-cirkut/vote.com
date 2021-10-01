@@ -9,14 +9,14 @@ const BottomNavigation = () => {
 	return (
 		<React.Fragment>
 			<div>
-				<section className="block fixed inset-x-0 bottom-0 z-10 bg-white shadow h-auto w-full max-w-sm mx-auto rounded sm:mb-4 sm:max-w-md">
+				<section className="block fixed inset-x-0 bottom-0 z-10 bg-blueGray-500 shadow h-auto w-full max-w-sm mx-auto rounded sm:mb-4 sm:max-w-md">
 					<div id="tabs" className="flex flex-row justify-around items-center h-full py-4">
 						<Link to="/">
 							<div
 								onClick={() => setSelected('home')}
 								id="home"
 								className={`flex flex-row justify-center items-center 
-						${selected === 'home' ? 'py-1 px-4 bg-blue-200 rounded-full' : ''}`}
+						${selected === 'home' ? 'py-1 px-4 bg-blue-200 rounded-full text-black' : ''}`}
 							>
 								<div>
 									<svg
@@ -45,7 +45,7 @@ const BottomNavigation = () => {
 								onClick={() => setSelected('search')}
 								id="search"
 								className={`flex flex-row justify-center items-center ${selected === 'search'
-									? 'py-1 px-4 bg-yellow-200 rounded-full'
+									? 'py-1 px-4 bg-yellow-200 rounded-full text-black'
 									: ''}`}
 							>
 								<div>
@@ -77,7 +77,7 @@ const BottomNavigation = () => {
 								onClick={() => setSelected('request')}
 								id="request"
 								className={`flex flex-row justify-center items-center ${selected === 'request'
-									? 'py-1 px-4 bg-red-200 rounded-full'
+									? 'py-1 px-4 bg-pink-300 rounded-full text-black'
 									: ''}`}
 							>
 								<div>
@@ -110,7 +110,7 @@ const BottomNavigation = () => {
 								onClick={() => setSelected('notification')}
 								id="notification"
 								className={`flex flex-row justify-center items-center ${selected === 'notification'
-									? 'py-1 px-4 bg-green-200 rounded-full'
+									? 'py-1 px-4 bg-green-200 rounded-full text-black'
 									: ''}`}
 							>
 								<div>
@@ -141,7 +141,7 @@ const BottomNavigation = () => {
 							onClick={() => setSelected('settings')}
 							id="settings"
 							className={`flex flex-row justify-center items-center ${selected === 'settings'
-								? 'py-1 px-4 bg-pink-200 rounded-full'
+								? 'py-1 px-4 bg-blue-400 rounded-full text-black'
 								: ''}`}
 						>
 							<div>

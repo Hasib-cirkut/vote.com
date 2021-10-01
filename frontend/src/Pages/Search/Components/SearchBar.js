@@ -4,11 +4,11 @@ const SearchBar = () => {
 	return (
 		<React.Fragment>
 			<div class="flex flex-row items-center p-4 max-w-lg mx-auto">
-				<div id="searchBar" class="flex-1 border-2 border-yellow-400 rounded-md">
-					<input type="text" class="w-full focus:outline-none px-2 py-1 font-light text-base" />
+				<div id="searchBar" class="flex-1 border-2  rounded">
+					<input type="text" placeholder="Search for threads." class="w-full focus:outline-none px-2 py-1 font-light text-base text-white bg-blueGray-900" />
 				</div>
 				<div id="searchBtn" class="bg-yellow-200 px-2 py-1 rounded ml-2">
-					<button class="text-sm font-medium text-center">Serach</button>
+					<button class="text-sm font-medium text-black text-center">Search</button>
 				</div>
 			</div>
 		</React.Fragment>
