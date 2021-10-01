@@ -1,11 +1,12 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 
 import ThreadCard from './Components/ThreadCard';
 
 const demoData = [
 	{
 		id: 1,
-		title: 'Bob Dylan is the best song writer of our generation',
+		title: 'Best Bob Dylan Album.',
 		desc: 'Bob Dylan is an American folk singer and song writer.',
 		loves: 1343,
 		genre: 'Music'
@@ -13,7 +14,7 @@ const demoData = [
 
 	{
 		id: 2,
-		title: 'Metallica is the thrashiest Band out there.',
+		title: 'Best Metallica Song.',
 		desc: 'Metallica is an American Thrash Metal Band.',
 		loves: 1219,
 		genre: 'Music'
@@ -21,6 +22,13 @@ const demoData = [
 ];
 
 const Main = () => {
+	const [ navInfo, setNavInfo ] = useState('home');
+
+	useEffect(() => {
+		setNavInfo(() => 'home');
+		localStorage.setItem('navInfo', navInfo);
+	}, []);
+
 	return (
 		<React.Fragment>
 			<div id="body" className="flex-1 overflow-y-auto mx-auto space-y-4">

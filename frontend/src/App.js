@@ -4,6 +4,7 @@ import Post from './Pages/Post/Post';
 import Search from './Pages/Search/Search';
 import Request from './Pages/Request/Request';
 import Notification from './Pages/Notification/Notification';
+import Settings from './Pages/Settings/Settings';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -20,6 +21,7 @@ function App() {
 					<Route path="/search" exact component={Search} />
 					<Route path="/request" exact component={Request} />
 					<Route path="/notification" exact component={Notification} />
+					<Route path="/settings" exact component={Settings} />
 				</Layout>
 			</Switch>
 		</BrowserRouter>

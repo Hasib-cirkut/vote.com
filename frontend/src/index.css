@@ -6,4 +6,8 @@
 	.input_box {
 		@apply w-full rounded-lg h-10 bg-gray-900 placeholder-gray-500 pl-4 font-normal text-sm focus:outline-none ring-2 ring-gray-900 focus:ring-offset-1 focus:ring-offset-blue-800 focus:ring-gray-800;
 	}
+
+	.btn_white {
+		@apply bg-white uppercase text-black text-xs font-bold text-center py-3 rounded-md cursor-pointer;
+	}
 }

@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import InputBox from './Components/InputBox';
 
 const Request = () => {
+	const [ navInfo, setNavInfo ] = useState('request');
+
+	useEffect(() => {
+		localStorage.setItem('navInfo', navInfo);
+	}, []);
+
 	return (
 		<React.Fragment>
 			<div className="items-center h-screen max-w-lg w-full mx-auto px-2">

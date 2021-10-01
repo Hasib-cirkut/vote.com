@@ -1,15 +1,24 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
 const BottomNavigation = () => {
-	const [ selected, setSelected ] = useState('home');
+	const [ selected, setSelected ] = useState();
+
+	useEffect(
+		() => {
+			setSelected(() => {
+				return localStorage['navInfo'];
+			});
+		},
+		[ selected ]
+	);
 
 	return (
 		<React.Fragment>
 			<div>
-				<section className="block fixed inset-x-0 bottom-0 z-10 bg-blueGray-500 shadow h-auto w-full max-w-sm mx-auto rounded sm:mb-4 sm:max-w-md">
+				<section className="block fixed inset-x-0 bottom-0 z-10 bg-blueGray-50 shadow h-auto w-full max-w-sm mx-auto rounded sm:mb-4 sm:max-w-md">
 					<div id="tabs" className="flex flex-row justify-around items-center h-full py-4">
 						<Link to="/">
 							<div
@@ -137,42 +146,44 @@ const BottomNavigation = () => {
 							</div>
 						</Link>
 
-						<div
-							onClick={() => setSelected('settings')}
-							id="settings"
-							className={`flex flex-row justify-center items-center ${selected === 'settings'
-								? 'py-1 px-4 bg-blue-400 rounded-full text-black'
-								: ''}`}
-						>
-							<div>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2.5"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									class="feather feather-sliders"
-								>
-									<line x1="4" y1="21" x2="4" y2="14" />
-									<line x1="4" y1="10" x2="4" y2="3" />
-									<line x1="12" y1="21" x2="12" y2="12" />
-									<line x1="12" y1="8" x2="12" y2="3" />
-									<line x1="20" y1="21" x2="20" y2="16" />
-									<line x1="20" y1="12" x2="20" y2="3" />
-									<line x1="1" y1="14" x2="7" y2="14" />
-									<line x1="9" y1="8" x2="15" y2="8" />
-									<line x1="17" y1="16" x2="23" y2="16" />
-								</svg>
-							</div>
+						<Link to="/settings">
+							<div
+								onClick={() => setSelected('settings')}
+								id="settings"
+								className={`flex flex-row justify-center items-center ${selected === 'settings'
+									? 'py-1 px-4 bg-blue-400 rounded-full text-black'
+									: ''}`}
+							>
+								<div>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="feather feather-sliders"
+									>
+										<line x1="4" y1="21" x2="4" y2="14" />
+										<line x1="4" y1="10" x2="4" y2="3" />
+										<line x1="12" y1="21" x2="12" y2="12" />
+										<line x1="12" y1="8" x2="12" y2="3" />
+										<line x1="20" y1="21" x2="20" y2="16" />
+										<line x1="20" y1="12" x2="20" y2="3" />
+										<line x1="1" y1="14" x2="7" y2="14" />
+										<line x1="9" y1="8" x2="15" y2="8" />
+										<line x1="17" y1="16" x2="23" y2="16" />
+									</svg>
+								</div>
 
-							<span className={`${selected === 'settings' ? 'ml-2 font-medium' : 'hidden'}`}>
-								Settings
-							</span>
-						</div>
+								<span className={`${selected === 'settings' ? 'ml-2 font-medium' : 'hidden'}`}>
+									Settings
+								</span>
+							</div>
+						</Link>
 					</div>
 				</section>
 			</div>
