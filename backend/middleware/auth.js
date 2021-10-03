@@ -5,6 +5,8 @@ const config = process.env;
 function verify(req, res, next) {
 	const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
+	console.log(token);
+
 	if (!token) {
 		//if token is unavailable, send user a 403
 

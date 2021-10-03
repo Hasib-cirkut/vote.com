@@ -5,6 +5,8 @@ import Search from './Pages/Search/Search';
 import Request from './Pages/Request/Request';
 import Notification from './Pages/Notification/Notification';
 import Settings from './Pages/Settings/Settings';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Vote from './Pages/Vote/Vote';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -15,6 +17,7 @@ function App() {
 		<BrowserRouter>
 			<Switch>
 				<Route path="/login" exact component={Login} />
+				<Route path="/dashboard" exact component={Dashboard} />
 				<Layout>
 					<Route path="/" exact component={Main} />
 					<Route path="/post" exact component={Post} />
@@ -22,6 +25,7 @@ function App() {
 					<Route path="/request" exact component={Request} />
 					<Route path="/notification" exact component={Notification} />
 					<Route path="/settings" exact component={Settings} />
+					<Route path="/vote" exact component={Vote} />
 				</Layout>
 			</Switch>
 		</BrowserRouter>

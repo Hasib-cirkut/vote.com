@@ -1,10 +1,62 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+
+const Auth = require('../middleware/auth');
 
 const UserModel = require('../Models/User');
 const RequestModel = require('../Models/Request');
 const VotePostModel = require('../Models/VotePost');
 const VoteThreadModel = require('../Models/VoteThread');
+
+const cloudinary = require('cloudinary');
+
+const storage = multer.diskStorage({
+	destination: function(req, file, cb) {
+		cb(null, 'public');
+	},
+	filename: (req, file, cb) => {
+		cb(null, 'image.jpg');
+	}
+});
+
+const upload = multer({ storage: storage }).single('image');
+
+router.post('/thread', Auth, async (req, res) => {
+	const { username, title, desc, token } = req.body;
+	const type = 'thread';
+
+	console.log(req.body);
+
+	res.status(200).send({
+		message: 'Thread Request Accepted.'
+	});
+});
+
+router.post('/votePost', async (req, res) => {
+	upload(req, res, (err) => {
+		if (err) {
+			res.sendStatus(500);
+		}
+
+		cloudinary.uploader.upload('./public/image.jpg', function(error, result) {
+			if (error) {
+				console.error(error);
+				res.status(500).send({
+					message: 'There was a problem while uploading the image. Please Try again Later.'
+				});
+			} else {
+				///Extract the url from result object
+
+				const imageUrl = result.url;
+				///create a database entry as a request model
+
+				const votePost = new RequestModel({});
+				///delete the image from public folder
+			}
+		});
+	});
+});
 
 router.post('/approve', async (req, res) => {
 	try {

@@ -6,7 +6,7 @@ let RequestSchema = new Schema({
 	username: { type: String, required: true },
 	title: { type: String, required: true },
 	desc: { type: String },
-	genre: { type: String, required: true },
+	genre: { type: String, required: false },
 	type: { type: String } // thread / votepost
 });
 

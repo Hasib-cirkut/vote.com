@@ -19,18 +19,21 @@ router.post('/login', async (req, res) => {
 
 			//create a jwt token for this user
 
-			const token = jwt.sign({ user_id: oldUser._id }, process.env.JWT_TOKEN, {
-				expiresIn: '2h'
-			});
+			const token = jwt.sign({ user_id: oldUser._id }, process.env.JWT_TOKEN);
 
 			return res.status(200).send({
 				user: oldUser,
-				token
+				token,
+				message: 'userfound'
+			});
+		} else {
+			res.send({
+				message: 'user!found'
 			});
 		}
 	} catch (err) {
 		res.status(403).send({
-			message: 'User not found.'
+			message: err
 		});
 	}
 });
@@ -58,29 +61,6 @@ router.post('/register', async (req, res) => {
 				message: 'duplicate'
 			});
 		}
-	}
-});
-
-router.post('/request', async (req, res) => {
-	try {
-		const { threadId, username, title, desc, type, genre } = req.body;
-
-		let request = new RequestModel({
-			threadId,
-			username,
-			title,
-			desc,
-			genre,
-			type
-		});
-
-		let requestObj = await request.save();
-
-		res.send({
-			message: `${type} requested`
-		});
-	} catch (e) {
-		console.error(e);
 	}
 });
 
