@@ -13,7 +13,7 @@ const Login = () => {
 			password
 		};
 
-		const response = await axios.post(`${process.env.REACT_APP_LOCAL_API_URL}/user/login`, payload);
+		const response = await axios.post(`${process.env.VITE_LOCAL_API_URL}/user/login`, payload);
 
 		if (response.data.message === 'user!found') {
 			console.log('user!found');

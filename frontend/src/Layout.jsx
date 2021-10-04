@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomNavigation from './Components/BottomNavigation';
+import BottomNavigation from './Components/BottomNavigation.jsx';
 
 import { Redirect } from 'react-router-dom';
 

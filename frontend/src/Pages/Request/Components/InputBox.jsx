@@ -5,12 +5,19 @@ import axios from 'axios';
 
 const type = [ { name: 'Thread', val: 'thread' }, { name: 'Vote Post', val: 'votePost' } ];
 
-const InputBox = () => {
+const InputBox = ({ setType }) => {
 	const [ title, setTitle ] = useState('');
 	const [ desc, setDesc ] = useState('');
 	const [ imageUrl, setImageUrl ] = useState(null);
 
 	const [ selected, setSelected ] = useState(type[0]);
+
+	const [ showBottomMsg, setBottomMsg ] = useState(false);
+
+	/// Error States
+
+	const [ showTitleError, setShowTitleError ] = useState(false);
+	const [ showDescError, setShowDescError ] = useState(false);
 
 	useEffect(
 		() => {
@@ -19,8 +26,27 @@ const InputBox = () => {
 		[ imageUrl ]
 	);
 
+	useEffect(
+		() => {
+			setType((prev) => selected.name);
+		},
+		[ selected ]
+	);
+
 	async function handleSubmit(e) {
 		e.preventDefault();
+
+		//handle Form error
+
+		if (title === '') {
+			setShowTitleError((prev) => true);
+			return;
+		}
+
+		if (desc === '') {
+			setShowDescError((prev) => true);
+			return;
+		}
 
 		const user = JSON.parse(localStorage.getItem('user'));
 		const token = localStorage.getItem('token');
@@ -49,7 +75,22 @@ const InputBox = () => {
 
 			let response = await axios.post(`${process.env.REACT_APP_LOCAL_API_URL}/request/thread`, payload);
 
-			console.log(response);
+			if (response.data.code === 'accepted') {
+				//Show bottom message
+				setBottomMsg((prev) => true);
+
+				//reset the state
+				setTitle((prev) => '');
+				setDesc((prev) => '');
+
+				//hide the bottom Message after 5s
+
+				setTimeout(() => {
+					setBottomMsg((prev) => false);
+				}, 5000);
+			} else {
+				console.log('request denied. try again later');
+			}
 		}
 	}
 
@@ -125,6 +166,7 @@ const InputBox = () => {
 						/>
 					</div>
 				</div>
+				{showTitleError && <span className="text-sm text-red-400 font-mono">Title is required.</span>}
 
 				<div id="desc" className="flex flex-col text-center">
 					<div className="rounded flex flex-row items-center">
@@ -139,6 +181,8 @@ const InputBox = () => {
 						/>
 					</div>
 				</div>
+
+				{showDescError && <span className="text-sm text-red-400 font-mono">Description is required.</span>}
 
 				{renderDropdown()}
 
@@ -162,8 +206,19 @@ const InputBox = () => {
 				</div>
 			</div>
 
-			<div className="btn_white h-11" onClick={handleSubmit}>
-				Submit Request
+			<div className="space-y-10">
+				<div className="btn_white h-11 transition hover:bg-green-300" onClick={handleSubmit}>
+					Submit Request
+				</div>
+
+				{showBottomMsg && (
+					<div className={`border rounded-sm px-4 py-2 text-xl font-md text-gray-300 text-center`}>
+						<p>
+							Request for {selected.name} has been accepted. You'll be notified when your request is added
+							to the main list. Thank you for you patience.
+						</p>
+					</div>
+				)}
 			</div>
 		</div>
 	);

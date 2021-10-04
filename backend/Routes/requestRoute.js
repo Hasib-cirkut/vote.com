@@ -28,9 +28,31 @@ router.post('/thread', Auth, async (req, res) => {
 
 	console.log(req.body);
 
-	res.status(200).send({
-		message: 'Thread Request Accepted.'
-	});
+	try {
+		const threadReq = new RequestModel({
+			username,
+			title,
+			desc,
+			genre: 'Misc',
+			type
+		});
+
+		let response = await threadReq.save();
+
+		if (response) {
+			res.status(200).send({
+				message: 'Thread Request Accepted.',
+				code: 'accepted'
+			});
+		}
+	} catch (e) {
+		console.log(e);
+
+		res.status(502).send({
+			message: 'Some problem in database. Try again Later',
+			code: 'denied'
+		});
+	}
 });
 
 router.post('/votePost', async (req, res) => {

@@ -1,12 +1,14 @@
-import Main from './Pages/Main/Main';
-import Login from './Pages/Login/Login';
-import Post from './Pages/Post/Post';
-import Search from './Pages/Search/Search';
-import Request from './Pages/Request/Request';
-import Notification from './Pages/Notification/Notification';
-import Settings from './Pages/Settings/Settings';
-import Dashboard from './Pages/Dashboard/Dashboard';
-import Vote from './Pages/Vote/Vote';
+import React from 'react';
+
+import Main from './Pages/Main/Main.jsx';
+import Login from './Pages/Login/Login.jsx';
+import Post from './Pages/Post/Post.jsx';
+import Search from './Pages/Search/Search.jsx';
+import Request from './Pages/Request/Request.jsx';
+import Notification from './Pages/Notification/Notification.jsx';
+import Settings from './Pages/Settings/Settings.jsx';
+import Dashboard from './Pages/Dashboard/Dashboard.jsx';
+import Vote from './Pages/Vote/Vote.jsx';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 

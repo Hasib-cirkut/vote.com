@@ -5,6 +5,8 @@ import InputBox from './Components/InputBox';
 const Request = () => {
 	const [ navInfo, setNavInfo ] = useState('request');
 
+	const [ type, setType ] = useState('Thread');
+
 	useEffect(() => {
 		localStorage.setItem('navInfo', navInfo);
 	}, []);
@@ -12,11 +14,19 @@ const Request = () => {
 	return (
 		<React.Fragment>
 			<div className="items-center h-screen max-w-lg w-full mx-auto px-2">
-				<div id="type" className="bg-red-400 text-white py-2 px-3 rounded w-full text-center">
-					<span>You have requested for a thread post</span>
+				<div
+					id="type"
+					className={`text-white py-2 text-gray-900 font-semibold px-3 rounded w-full text-center ${type ===
+					'Thread'
+						? 'bg-yellow-300'
+						: 'bg-green-300'}`}
+				>
+					<span>
+						Requesting for {type} {type === 'Thread' && <span>post</span>}
+					</span>
 				</div>
 
-				<InputBox />
+				<InputBox setType={setType} />
 			</div>
 		</React.Fragment>
 	);

@@ -13,6 +13,7 @@ const mongoose = require('mongoose');
 const userRoute = require('./Routes/userRoute');
 const voteRoute = require('./Routes/voteRoute');
 const requestRoute = require('./Routes/requestRoute');
+const adminRoute = require('./Routes/adminRoute');
 
 //Middleware
 
@@ -26,6 +27,7 @@ app.use(
 app.use('/user', userRoute);
 app.use('/vote', voteRoute);
 app.use('/request', requestRoute);
+app.use('/admin', adminRoute);
 
 app.use(express.static('public'));
 
