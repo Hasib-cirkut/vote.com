@@ -1,43 +1,39 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React from 'react'
+import { useState, useEffect } from 'react'
 
-import ThreadCard from './Components/ThreadCard';
-
-const demoData = [
-	{
-		id: 1,
-		title: 'Best Bob Dylan Album.',
-		desc: 'Bob Dylan is an American folk singer and song writer.',
-		loves: 1343,
-		genre: 'Music'
-	},
-
-	{
-		id: 2,
-		title: 'Best Metallica Song.',
-		desc: 'Metallica is an American Thrash Metal Band.',
-		loves: 1219,
-		genre: 'Music'
-	}
-];
+import ThreadCard from './Components/ThreadCard'
 
 const Main = () => {
-	const [ navInfo, setNavInfo ] = useState('home');
+  const [navInfo, setNavInfo] = useState('home')
+  const [data, setData] = useState([])
 
-	useEffect(() => {
-		setNavInfo(() => 'home');
-		localStorage.setItem('navInfo', navInfo);
-	}, []);
+  useEffect(() => {
+    setNavInfo(() => 'home')
+    localStorage.setItem('navInfo', navInfo)
 
-	return (
-		<React.Fragment>
-			<div id="body" className="flex-1 overflow-y-auto mx-auto space-y-4">
-				{demoData.map((data) => {
-					return <ThreadCard {...data} key={data.id} />;
-				})}
-			</div>
-		</React.Fragment>
-	);
-};
+    async function getData() {
+      // eslint-disable-next-line no-undef
+      let response = await fetch(`${process.env.VITE_LOCAL_API_URL}/thread/`)
 
-export default Main;
+      response = await response.json()
+
+      setData(() => {
+        return response
+      })
+    }
+
+    getData()
+  }, [])
+
+  return (
+    <React.Fragment>
+      <div id="body" className="flex-1 mx-auto max-w-2xl space-y-4 pb-36">
+        {data.map((item) => {
+          return <ThreadCard {...item} key={item._id} />
+        })}
+      </div>
+    </React.Fragment>
+  )
+}
+
+export default Main

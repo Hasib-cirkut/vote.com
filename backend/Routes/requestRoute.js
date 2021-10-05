@@ -109,14 +109,13 @@ router.post('/approve', async (req, res) => {
 
 			newThread = await newThread.save();
 
-			console.log('here');
-
 			// 	/// Remove the request using requestId from Request Collection
 
 			await RequestModel.findByIdAndDelete(requestId);
 
 			res.send({
-				message: 'Request added to Threads and Deleted from requests'
+				message: 'Request added to Threads and Deleted from requests',
+				code: 'approved'
 			});
 		} else if (type === 'votepost') {
 			let newVotePost = new VotePostModel({
@@ -139,16 +138,17 @@ router.post('/approve', async (req, res) => {
 
 router.post('/deny', async (req, res) => {
 	try {
-		const { requestId, username } = req.body;
+		const { id, username } = req.body;
 
 		//Delete the request from request Collection
 
-		let deleted = await RequestModel.findByIdAndDelete(requestId);
+		let deleted = await RequestModel.findByIdAndDyaelete(id);
 
 		//TODO: Send notification to user
 
 		res.send({
-			message: 'deleted'
+			message: 'The Post is deleted',
+			code: 'denied'
 		});
 	} catch (e) {}
 });

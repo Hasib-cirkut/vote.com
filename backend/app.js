@@ -14,6 +14,7 @@ const userRoute = require('./Routes/userRoute');
 const voteRoute = require('./Routes/voteRoute');
 const requestRoute = require('./Routes/requestRoute');
 const adminRoute = require('./Routes/adminRoute');
+const threadRoute = require('./Routes/threadRoute');
 
 //Middleware
 
@@ -28,6 +29,7 @@ app.use('/user', userRoute);
 app.use('/vote', voteRoute);
 app.use('/request', requestRoute);
 app.use('/admin', adminRoute);
+app.use('/thread', threadRoute);
 
 app.use(express.static('public'));
 
