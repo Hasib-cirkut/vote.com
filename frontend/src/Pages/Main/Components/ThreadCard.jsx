@@ -37,7 +37,7 @@ const ThreadCard = ({ title, desc, votes, genre }) => {
 ThreadCard.propTypes = {
   title: PropTypes.string,
   desc: PropTypes.string,
-  votes: PropTypes.string,
+  votes: PropTypes.number,
   genre: PropTypes.string,
 }
 
