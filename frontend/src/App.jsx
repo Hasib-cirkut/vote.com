@@ -9,6 +9,7 @@ import Request from './Pages/Request/Request.jsx'
 import Notification from './Pages/Notification/Notification.jsx'
 import Settings from './Pages/Settings/Settings.jsx'
 import Dashboard from './Pages/Dashboard/Dashboard.jsx'
+import Vote from './Pages/Votes/Vote.jsx'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/request" exact component={Request} />
           <Route path="/notification" exact component={Notification} />
           <Route path="/settings" exact component={Settings} />
+          <Route path="/vote" exact render={(props) => <Vote {...props} />} />
         </Layout>
       </Switch>
     </BrowserRouter>

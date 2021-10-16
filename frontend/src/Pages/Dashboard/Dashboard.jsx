@@ -10,6 +10,8 @@ export default function Dashboard() {
 
   const [render, setRender] = useState(false)
 
+  const [userType] = useState(JSON.parse(localStorage.getItem('user')).type)
+
   function setRenderWrapper() {
     ;(() => {
       setRender((prev) => !prev)
@@ -19,21 +21,21 @@ export default function Dashboard() {
   useEffect(() => {
     async function getData() {
       let response = await fetch(
-        // eslint-disable-next-line no-undef
-        `${process.env.VITE_LOCAL_API_URL}/admin/threads`
+        `${import.meta.env.VITE_LOCAL_API_URL}/admin/threads`
       )
 
       response = await response.json()
 
-      setData(() => {
-        return response
-      })
+      return response
     }
 
-    getData()
+    getData().then((res) => setData(() => res))
   }, [render])
 
-  if (localStorage.getItem('token')) {
+  if (
+    (localStorage.getItem('token') && userType === 'root') ||
+    userType === 'admin'
+  ) {
     return (
       <React.Fragment>
         <div className="min-h-screen overflow-x-hidden w-screen bg-black">
@@ -79,16 +81,29 @@ export default function Dashboard() {
 
             <div className="">
               <div id="requestArea" className=" space-y-4 px-2 bg-black my-10">
-                {data.map((item) => {
-                  if (item.type === 'thread')
-                    return (
-                      <RequestCard
-                        {...item}
-                        key={item._id}
-                        setRenderWrapper={setRenderWrapper}
-                      />
-                    )
-                })}
+                {type === 'thread'
+                  ? data.map((item) => {
+                      return (
+                        item.type === 'thread' && (
+                          <RequestCard
+                            {...item}
+                            setRenderWrapper={setRenderWrapper}
+                            key={item._id}
+                          />
+                        )
+                      )
+                    })
+                  : data.map((item) => {
+                      return (
+                        item.type !== 'thread' && (
+                          <RequestCard
+                            {...item}
+                            setRenderWrapper={setRenderWrapper}
+                            key={item._id}
+                          />
+                        )
+                      )
+                    })}
               </div>
             </div>
           </div>

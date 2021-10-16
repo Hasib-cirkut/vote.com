@@ -13,8 +13,7 @@ export default function RequestCard({
   async function handleRequestApproval(code) {
     if (code === 'approved') {
       let response = await axios.post(
-        // eslint-disable-next-line no-undef
-        `${process.env.VITE_LOCAL_API_URL}/request/approve`,
+        `${import.meta.env.VITE_LOCAL_API_URL}/request/approve`,
         { id: _id }
       )
 
@@ -24,12 +23,11 @@ export default function RequestCard({
       }
     } else {
       let response = await axios.post(
-        // eslint-disable-next-line no-undef
-        `${process.env.VITE_LOCAL_API_URL}/request/deny`,
+        `${import.meta.env.VITE_LOCAL_API_URL}/request/deny`,
         { id: _id, username }
       )
 
-      if (response.data.code === 'denied') {
+      if (response.data.code === 'deleted') {
         setRenderWrapper()
       }
     }

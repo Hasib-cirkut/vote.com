@@ -6,11 +6,18 @@ const RequestModel = require('../Models/Request');
 
 const jwt = require('jsonwebtoken');
 
+const checkExistingUser = require('../middleware/checkExistingUser')
+
 router.post('/login', async (req, res) => {
 	try {
-		const { username, password } = req.body;
+		const {
+			username,
+			password
+		} = req.body;
 
-		let oldUser = await UserModel.findOne({ username });
+		let oldUser = await UserModel.findOne({
+			username
+		});
 
 		console.log(oldUser);
 
@@ -19,7 +26,9 @@ router.post('/login', async (req, res) => {
 
 			//create a jwt token for this user
 
-			const token = jwt.sign({ user_id: oldUser._id }, process.env.JWT_TOKEN);
+			const token = jwt.sign({
+				user_id: oldUser._id
+			}, process.env.JWT_TOKEN);
 
 			return res.status(200).send({
 				user: oldUser,
@@ -40,7 +49,14 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
 	try {
-		const { username, email, password, displayName, type } = req.body;
+
+		const {
+			username,
+			email,
+			password,
+			displayName,
+			type
+		} = req.body;
 
 		let user = new UserModel({
 			username,
@@ -50,11 +66,27 @@ router.post('/register', async (req, res) => {
 			type
 		});
 
-		let savedUser = await user.save();
+		user.save(function (err) {
+			if (err) {
+				if (err.name === 'MongoError' && err.code === 11000) {
+					// Duplicate username
+					return res.status(500).send({
+						success: false,
+						message: 'User already exist!'
+					});
+				}
 
-		res.send({
-			message: 'useradded'
+				// Some other error
+				return res.status(500).send(err);
+			} else {
+				res.send({
+					success: true,
+					code: 'useradded'
+				})
+			}
+
 		});
+
 	} catch (e) {
 		if (e.code === 11000) {
 			res.send({
@@ -63,5 +95,6 @@ router.post('/register', async (req, res) => {
 		}
 	}
 });
+
 
 module.exports = router;

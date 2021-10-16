@@ -18,7 +18,7 @@ const Notification = () => {
 
   return (
     <React.Fragment>
-      <div className="flex flex-col mx-auto space-y-4 max-w-2xl">
+      <div className="flex flex-col mx-auto space-y-4 max-w-md">
         {demoData.map((item) => {
           return <NotificationCard title={item.title} key={item.id} />
         })}

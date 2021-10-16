@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import ThreadCard from './Components/ThreadCard'
 
@@ -29,7 +30,17 @@ const Main = () => {
     <React.Fragment>
       <div id="body" className="flex-1 mx-auto max-w-2xl space-y-4 pb-36">
         {data.map((item) => {
-          return <ThreadCard {...item} key={item._id} />
+          return (
+            <Link
+              to={{
+                pathname: '/vote',
+                state: { ...item },
+              }}
+              key={item._id}
+            >
+              <ThreadCard {...item} />
+            </Link>
+          )
         })}
       </div>
     </React.Fragment>

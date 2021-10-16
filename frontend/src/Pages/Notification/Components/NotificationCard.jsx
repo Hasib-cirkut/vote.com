@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const NotificationCard = ({ title }) => {
   return (
     <div className="">
-      <div className="bg-gray-800 text-gray-50 px-4 py-4 text-lg rounded-sm">
+      <div className="bg-gray-800 text-gray-50 px-4 py-4 text-base rounded-sm">
         <h3>
           Your request for <span className="text-blue-400">{title}</span> has
           been accepted. You can find the changes{' '}

@@ -65,7 +65,12 @@ const BottomNavigation = () => {
               />
             </Link>
 
-            <Link to="/request">
+            <Link
+              to={{
+                pathname: '/request',
+                type: 'thread',
+              }}
+            >
               <Tab
                 Icon={AddIcon}
                 text="Request"

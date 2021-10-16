@@ -6,37 +6,50 @@ const VotePostModel = require('../Models/VotePost');
 
 const auth = require('../middleware/auth.js');
 
-router.get('/', auth, (req, res) => {
-	res.status(200).send({
-		message: 'Welcome to vote.com!!'
-	});
-});
 
-router.post('/addThread', async (req, res) => {
+router.get('/', async (req, res) => {
+
+
+	const slug = req.query.slug;
+
 	try {
-		const { username, title, genre, desc } = req.body;
 
-		let votePost = new VoteThreadModel({
-			username,
-			title,
-			genre,
-			desc
-		});
+		/* return all vote posts associated with the provided threadId */
+		let res = await VotePostModel.find({
+			threadId: slug
+		})
 
-		let savedPost = await votePost.save();
+		res.send(res)
 
+	} catch (e) {
 		res.send({
-			message: 'vote thread added'
-		});
-	} catch (e) {}
-});
+			code: "content!found",
+			message: "Content Not Found."
+		})
+	}
+})
 
 router.post('/like', async (req, res) => {
 	try {
-		const { id, state } = req.body;
+		const {
+			id,
+			state
+		} = req.body;
 
-		if (state === 'inc') VotePostModel.findOneAndUpdate({ _id: id }, { $inc: { votes: 1 } }).exec();
-		else if (state === 'dec') VotePostModel.findOneAndUpdate({ _id: id }, { $inc: { votes: -1 } }).exec();
+		if (state === 'inc') VotePostModel.findOneAndUpdate({
+			_id: id
+		}, {
+			$inc: {
+				votes: 1
+			}
+		}).exec();
+		else if (state === 'dec') VotePostModel.findOneAndUpdate({
+			_id: id
+		}, {
+			$inc: {
+				votes: -1
+			}
+		}).exec();
 
 		res.send(`vote ${state === 'inc' ? 'added' : 'subtracted'}`);
 	} catch (e) {}

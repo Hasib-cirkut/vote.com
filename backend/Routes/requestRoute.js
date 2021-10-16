@@ -12,7 +12,7 @@ const VoteThreadModel = require('../Models/VoteThread');
 const cloudinary = require('cloudinary');
 
 const storage = multer.diskStorage({
-	destination: function(req, file, cb) {
+	destination: function (req, file, cb) {
 		cb(null, 'public');
 	},
 	filename: (req, file, cb) => {
@@ -20,10 +20,17 @@ const storage = multer.diskStorage({
 	}
 });
 
-const upload = multer({ storage: storage }).single('image');
+const upload = multer({
+	storage: storage
+}).single('image');
 
 router.post('/thread', Auth, async (req, res) => {
-	const { username, title, desc, token } = req.body;
+	const {
+		username,
+		title,
+		desc,
+		token
+	} = req.body;
 	const type = 'thread';
 
 	console.log(req.body);
@@ -61,7 +68,7 @@ router.post('/votePost', async (req, res) => {
 			res.sendStatus(500);
 		}
 
-		cloudinary.uploader.upload('./public/image.jpg', function(error, result) {
+		cloudinary.uploader.upload('./public/image.jpg', function (error, result) {
 			if (error) {
 				console.error(error);
 				res.status(500).send({
@@ -82,14 +89,22 @@ router.post('/votePost', async (req, res) => {
 
 router.post('/approve', async (req, res) => {
 	try {
-		const { id } = req.body;
+		const {
+			id
+		} = req.body;
 
 		//check type and act accordingly
 
 		let request = await RequestModel.findById(id);
 
 		let requestId = request._id;
-		let { username, title, desc, type, genre } = request;
+		let {
+			username,
+			title,
+			desc,
+			type,
+			genre
+		} = request;
 
 		let threadId = request.threadId;
 
@@ -138,19 +153,31 @@ router.post('/approve', async (req, res) => {
 
 router.post('/deny', async (req, res) => {
 	try {
-		const { id, username } = req.body;
+		const {
+			id,
+			username
+		} = req.body;
+
+		console.log(req.body);
+
 
 		//Delete the request from request Collection
 
-		let deleted = await RequestModel.findByIdAndDyaelete(id);
+		let deleted = await RequestModel.findByIdAndDelete(id);
 
 		//TODO: Send notification to user
 
 		res.send({
 			message: 'The Post is deleted',
-			code: 'denied'
+			code: 'deleted'
 		});
-	} catch (e) {}
+	} catch (e) {
+		res.send({
+			error: e,
+			code: "could!del",
+			message: "Some Problem Occured while deleteting."
+		})
+	}
 });
 
 module.exports = router;

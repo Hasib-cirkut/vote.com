@@ -9,14 +9,14 @@ const type = [
   { name: 'Vote Post', val: 'votePost' },
 ]
 
-const InputBox = ({ setType }) => {
+const InputBox = () => {
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
   const [imageUrl, setImageUrl] = useState(null)
 
   const [selected, setSelected] = useState(type[0])
 
-  const [showBottomMsg] = useState(false)
+  const [showBottomMsg, setShowBottomMsg] = useState(false)
 
   /// Error States
 
@@ -27,9 +27,7 @@ const InputBox = ({ setType }) => {
     console.log(imageUrl)
   }, [imageUrl])
 
-  useEffect(() => {
-    setType(() => selected.name)
-  }, [selected])
+  useEffect(() => {}, [selected])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -57,8 +55,7 @@ const InputBox = ({ setType }) => {
       data.append('image', imageUrl)
 
       let returnVal = await axios.post(
-        // eslint-disable-next-line no-undef
-        `${process.env.VITE_LOCAL_API_URL}/request/votePost`,
+        `${import.meta.env.VITE_LOCAL_API_URL}/request/votePost`,
         data
       )
 
@@ -75,19 +72,17 @@ const InputBox = ({ setType }) => {
       }
 
       let response = await axios.post(
-        // eslint-disable-next-line no-undef
-        `${process.env.VITE_LOCAL_API_URL}/request/thread`,
+        `${import.meta.env.VITE_LOCAL_API_URL}/request/thread`,
         payload
       )
 
       if (response.data.code === 'accepted') {
         //Show bottom message
+        setShowBottomMsg(() => true)
 
         //reset the state
         setTitle(() => '')
         setDesc(() => '')
-
-        //hide the bottom Message after 5
       } else {
         console.log('request denied. try again later')
       }
@@ -203,8 +198,6 @@ const InputBox = ({ setType }) => {
             Description is required.
           </span>
         )}
-
-        {renderDropdown()}
 
         {selected.val === 'votePost' && (
           <div id="imageUpload">
